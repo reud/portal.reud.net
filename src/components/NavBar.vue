@@ -4,14 +4,20 @@
             color="primary"
             dark
     >
-        <v-toolbar-title>reud portfolio</v-toolbar-title>
+        <v-toolbar-title>reud is</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-overflow-btn
-                v-if="$vuetify.breakpoint.xs"
-                :items="menuNames"
-                color="primary"
-                label="Jump to..."
-        />
+        <v-menu v-if="this.$vuetify.breakpoint.xs">
+            <template v-slot:activator="{ on }">
+                <v-btn color="primary" dark v-on="on">Jump to</v-btn>
+            </template>
+            <v-list>
+                <v-list-item v-for="mnu in xsMenus"
+                             :key="mnu.id"
+                             @click="move(mnu.route)">
+                    <v-list-item-title>{{ mnu.name }}</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
         <v-btn  v-for="mnu in menus"
                target="_blank"
                text
@@ -56,6 +62,11 @@
                     icon: 'briefcase-outline'
                 },
                 {
+                    route: '/archivements',
+                    name: 'ARCHIVEMENTS',
+                    icon: 'briefcase-outline'
+                },
+                {
                     route: '/skills',
                     name: 'SKILLS',
                     icon: 'checkbox-marked-outline'
@@ -90,6 +101,9 @@
             },
             menuNames() {
                 return this.allMenus.filter(i => i.route !== location.pathname).filter(i => i.route !== this.clicked).map(m => m.name);
+            },
+            xsMenus() {
+                return this.allMenus.filter(i => i.route !== location.pathname).filter(i => i.route !== this.clicked);
             }
         }
     });
