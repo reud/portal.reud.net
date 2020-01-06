@@ -62,14 +62,9 @@
                     icon: 'briefcase-outline'
                 },
                 {
-                    route: '/archivements',
-                    name: 'ARCHIVEMENTS',
+                    route: '/achievements',
+                    name: 'ACHIEVEMENTS',
                     icon: 'briefcase-outline'
-                },
-                {
-                    route: '/skills',
-                    name: 'SKILLS',
-                    icon: 'checkbox-marked-outline'
                 },
                 {
                     route: '/hobby',

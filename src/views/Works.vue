@@ -4,8 +4,7 @@
                 v-for="item in items"
                 :key="item.id"
                 :color=" item.color+' lighten-2'"
-                fill-dot
-                right>
+                fill-dot>
             <span slot="opposite"> {{ item.date }}</span>
             <v-card>
                 <v-card-title :class=" item.color+' lighten-2'">
@@ -15,12 +14,8 @@
                             class="mr-4">
                         mdi-{{ item.icon }}
                     </v-icon>
-                    <h2>
-                        <a :href="item.url"
-                           class="display-1 white--text font-weight-light"
-                        >
+                    <h2 class="display-1 white--text font-weight-light">
                             {{ item.title }}
-                        </a>
                     </h2>
                 </v-card-title>
                 <v-container>
@@ -36,6 +31,14 @@
                         </v-col>
                     </v-row>
                 </v-container>
+                <v-card-actions v-if="item.url">
+                    <v-btn
+                            text
+                            :href="item.url"
+                            color="deep-purple accent-4">
+                        LEARN MORE
+                    </v-btn>
+                </v-card-actions>
             </v-card>
 
         </v-timeline-item>
