@@ -35,10 +35,20 @@
             <span class="mr-2">Login</span>
             <v-icon>mdi-open-in-new</v-icon>
         </v-btn>
-        <v-chip v-if="$auth.isAuthenticated">
-            <v-icon left color="red">mdi-account</v-icon>
-            {{ $auth.user.name }}
-        </v-chip>
+        <v-menu v-if="$auth.isAuthenticated">
+            <template v-slot:activator="{ on }">
+                <v-chip v-on="on">
+                    <v-icon left color="red">mdi-account</v-icon>
+                    {{ $auth.user.name }}
+                </v-chip>
+            </template>
+            <v-list>
+                <v-list-item @click.prevent="logout">
+                    <v-list-item-title> logout </v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-menu>
+
     </v-app-bar>
 </template>
 
@@ -79,8 +89,10 @@
                 this.$auth.loginWithRedirect();
             },
             logout() {
-                this.$auth.logout();
-                this.$router.push({path: "/"});
+                this.$auth.logout({
+                    returnTo: location.href
+                });
+                // this.$router.push({path: "/"});
             },
             move(route) {
                 this.$router.push(route);
