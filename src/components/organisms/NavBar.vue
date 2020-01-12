@@ -43,6 +43,11 @@
                 </v-chip>
             </template>
             <v-list>
+                <v-list-item v-for="menu in visitorMenus"
+                             :key="menu.id"
+                             @click="move(menu.route)">
+                    {{ menu.name }}
+                </v-list-item>
                 <v-list-item @click.prevent="logout">
                     <v-list-item-title> logout </v-list-item-title>
                 </v-list-item>
@@ -82,7 +87,13 @@
                     icon: 'ev-station'
                 }
             ],
-            clicked: ''
+            clicked: '',
+            visitorMenus: [
+                {
+                    route: '/visitor/profile',
+                    name: 'profile',
+                }
+            ]
         }),
         methods: {
             login() {
@@ -95,8 +106,12 @@
                 });
             },
             move(route) {
-                this.$router.push(route);
-                this.clicked = route;
+                if (this.$route.path !== route) {
+                    console.log('now route: '+this.$route.path);
+                    console.log('to: '+route);
+                    this.$router.push(route);
+                    this.clicked = route;
+                }
             }
         },
         computed: {
