@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import VisitorProfile from '@/components/templates/VisitorProfile.vue';
+import {authGuard} from "@/auth";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -38,6 +39,18 @@ const routes = [
     path: '/hobby',
     name: 'hobby',
     component: () => import('../views/Hobby.vue')
+  },
+  {
+    path: '/visitor',
+    component: () => import('../views/Visitor.vue'),
+    children: [
+      {
+        path: 'profile',
+        name: 'visitor profile',
+        component: VisitorProfile
+      }
+    ],
+    beforeEnter: authGuard
   }
 ];
 
