@@ -89,10 +89,10 @@
                 this.$auth.loginWithRedirect();
             },
             logout() {
+                let returnTo = location.protocol+'//'+location.host;
                 this.$auth.logout({
-                    returnTo: location.href
+                    returnTo: returnTo
                 });
-                // this.$router.push({path: "/"});
             },
             move(route) {
                 this.$router.push(route);
