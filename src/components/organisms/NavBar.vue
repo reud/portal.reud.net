@@ -39,10 +39,15 @@
             <template v-slot:activator="{ on }">
                 <v-chip v-on="on">
                     <v-icon left color="red">mdi-account</v-icon>
-                    {{ $auth.user.name }}
+                    {{ $auth.user.nickname }}
                 </v-chip>
             </template>
             <v-list>
+                <v-list-item v-for="menu in visitorMenus"
+                             :key="menu.id"
+                             @click="move(menu.route)">
+                    {{ menu.name }}
+                </v-list-item>
                 <v-list-item @click.prevent="logout">
                     <v-list-item-title> logout </v-list-item-title>
                 </v-list-item>
@@ -82,21 +87,31 @@
                     icon: 'ev-station'
                 }
             ],
-            clicked: ''
+            clicked: '',
+            visitorMenus: [
+                {
+                    route: '/visitor/profile',
+                    name: 'profile',
+                }
+            ]
         }),
         methods: {
             login() {
                 this.$auth.loginWithRedirect();
             },
             logout() {
+                let returnTo = location.protocol+'//'+location.host;
                 this.$auth.logout({
-                    returnTo: location.href
+                    returnTo: returnTo
                 });
-                // this.$router.push({path: "/"});
             },
             move(route) {
-                this.$router.push(route);
-                this.clicked = route;
+                if (this.$route.path !== route) {
+                    console.log('now route: '+this.$route.path);
+                    console.log('to: '+route);
+                    this.$router.push(route);
+                    this.clicked = route;
+                }
             }
         },
         computed: {
