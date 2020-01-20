@@ -39,7 +39,7 @@
             <template v-slot:activator="{ on }">
                 <v-chip v-on="on">
                     <v-icon left color="red">mdi-account</v-icon>
-                    {{ $auth.user.name }}
+                    {{ $auth.user.nickname }}
                 </v-chip>
             </template>
             <v-list>
