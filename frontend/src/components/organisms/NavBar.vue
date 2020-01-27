@@ -107,8 +107,6 @@
             },
             move(route) {
                 if (this.$route.path !== route) {
-                    console.log('now route: '+this.$route.path);
-                    console.log('to: '+route);
                     this.$router.push(route);
                     this.clicked = route;
                 }
