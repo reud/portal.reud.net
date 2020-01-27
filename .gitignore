@@ -1,7 +1,8 @@
 wwwroot/*.js
 node_modules
 typings
+.idea
 
 
 # for test
-gen/
+gen
