@@ -7,8 +7,8 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "TODO"
-basePath: "/"
+host: "localhost:8000"
+basePath: "/api"
 tags:
   - name: "bookshelf"
     description: "本棚機能に関連したもの"
@@ -18,12 +18,32 @@ schemes:
   - "http"
 paths:
   /bookshelf:
+    get:
+      tags:
+        - "bookshelf"
+      summary: "Get books I read, from DB"
+      description: "DBに保存された本の情報の取得"
+      operationId: "getReudBook"
+      consumes:
+        - "application/json"
+      responses:
+        200:
+          description: "本の情報、IDはreudが本を同サイトから消す際に使用される。"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/StoredBook"
+        500:
+          description: "Internal Server Error"
+
     post:
       tags:
         - "bookshelf"
       summary: "Add a new book to bookshelf"
       description: "amazonの本を投稿できる機能(amazonにあるもの)"
       operationId: "addReudBook"
+      security:
+        - auth0Auth: []
       consumes:
         - "application/json"
       parameters:
@@ -49,6 +69,8 @@ paths:
       summary: "delete book by id"
       description: "amazonの投稿した本を削除する機能"
       operationId: "deleteReudBook"
+      security:
+        - auth0Auth: []
       parameters:
         - name: "bookId"
           in: "path"
@@ -64,6 +86,16 @@ paths:
         401:
           description: "Unauthorized"
 definitions:
+  StoredBook:
+    type: "object"
+    required:
+      - "ID"
+    properties:
+      ID:
+        type: "integer"
+        example: "24"
+      book:
+        $ref: "#/definitions/Book"
   Book:
     type: "object"
     required:
@@ -90,3 +122,8 @@ definitions:
       tag3:
         type: "string"
         example: "C++"
+securityDefinitions:
+  auth0Auth:
+    type: "apiKey"
+    in: "header"
+    name: "Authorization"

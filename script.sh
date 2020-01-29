@@ -6,7 +6,7 @@ codegen() {
     -o /local/frontend/src/gen
   # backend codegen
   # TODO: mainの構成がわかって、自力でmain.goが作れたら --exclude-main を入れる
-  swagger generate server -f swagger.yaml -t backend/gen
+  swagger generate server -f swagger.yaml -t backend/gen --principal 
 }
 
 allocator() {

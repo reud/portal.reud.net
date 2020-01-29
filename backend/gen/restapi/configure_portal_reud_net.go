@@ -3,15 +3,13 @@
 package restapi
 
 import (
+	"backend/handler/reudbook"
 	"crypto/tls"
 	"net/http"
 
+	"backend/gen/restapi/operations"
 	errors "github.com/go-openapi/errors"
 	runtime "github.com/go-openapi/runtime"
-	middleware "github.com/go-openapi/runtime/middleware"
-
-	"backend/gen/restapi/operations"
-	"backend/gen/restapi/operations/bookshelf"
 )
 
 //go:generate swagger generate server --target ../../gen --name PortalReudNet --spec ../../../swagger.yaml --exclude-main
@@ -34,16 +32,9 @@ func configureAPI(api *operations.PortalReudNetAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.BookshelfAddReudBookHandler == nil {
-		api.BookshelfAddReudBookHandler = bookshelf.AddReudBookHandlerFunc(func(params bookshelf.AddReudBookParams) middleware.Responder {
-			return middleware.NotImplemented("operation bookshelf.AddReudBook has not yet been implemented")
-		})
-	}
-	if api.BookshelfDeleteReudBookHandler == nil {
-		api.BookshelfDeleteReudBookHandler = bookshelf.DeleteReudBookHandlerFunc(func(params bookshelf.DeleteReudBookParams) middleware.Responder {
-			return middleware.NotImplemented("operation bookshelf.DeleteReudBook has not yet been implemented")
-		})
-	}
+	api.BookshelfAddReudBookHandler = reudbook.AddReudBookHandler()
+	api.BookshelfDeleteReudBookHandler = reudbook.DeleteReudBookHandler()
+	api.BookshelfGetReudBookHandler = reudbook.GetReudBookHandler()
 
 	api.ServerShutdown = func() {}
 

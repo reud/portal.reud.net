@@ -39,12 +39,23 @@ func NewPortalReudNetAPI(spec *loads.Document) *PortalReudNetAPI {
 		BearerAuthenticator: security.BearerAuth,
 		JSONConsumer:        runtime.JSONConsumer(),
 		JSONProducer:        runtime.JSONProducer(),
-		BookshelfAddReudBookHandler: bookshelf.AddReudBookHandlerFunc(func(params bookshelf.AddReudBookParams) middleware.Responder {
+		BookshelfAddReudBookHandler: bookshelf.AddReudBookHandlerFunc(func(params bookshelf.AddReudBookParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation BookshelfAddReudBook has not yet been implemented")
 		}),
-		BookshelfDeleteReudBookHandler: bookshelf.DeleteReudBookHandlerFunc(func(params bookshelf.DeleteReudBookParams) middleware.Responder {
+		BookshelfDeleteReudBookHandler: bookshelf.DeleteReudBookHandlerFunc(func(params bookshelf.DeleteReudBookParams, principal interface{}) middleware.Responder {
 			return middleware.NotImplemented("operation BookshelfDeleteReudBook has not yet been implemented")
 		}),
+		BookshelfGetReudBookHandler: bookshelf.GetReudBookHandlerFunc(func(params bookshelf.GetReudBookParams) middleware.Responder {
+			return middleware.NotImplemented("operation BookshelfGetReudBook has not yet been implemented")
+		}),
+
+		// Applies when the "Authorization" header is set
+		Auth0AuthAuth: func(token string) (interface{}, error) {
+			return nil, errors.NotImplemented("api key auth (auth0Auth) Authorization from header param [Authorization] has not yet been implemented")
+		},
+
+		// default authorizer is authorized meaning no requests are blocked
+		APIAuthorizer: security.Authorized(),
 	}
 }
 
@@ -76,10 +87,19 @@ type PortalReudNetAPI struct {
 	// JSONProducer registers a producer for a "application/json" mime type
 	JSONProducer runtime.Producer
 
+	// Auth0AuthAuth registers a function that takes a token and returns a principal
+	// it performs authentication based on an api key Authorization provided in the header
+	Auth0AuthAuth func(string) (interface{}, error)
+
+	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
+	APIAuthorizer runtime.Authorizer
+
 	// BookshelfAddReudBookHandler sets the operation handler for the add reud book operation
 	BookshelfAddReudBookHandler bookshelf.AddReudBookHandler
 	// BookshelfDeleteReudBookHandler sets the operation handler for the delete reud book operation
 	BookshelfDeleteReudBookHandler bookshelf.DeleteReudBookHandler
+	// BookshelfGetReudBookHandler sets the operation handler for the get reud book operation
+	BookshelfGetReudBookHandler bookshelf.GetReudBookHandler
 
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
@@ -143,12 +163,20 @@ func (o *PortalReudNetAPI) Validate() error {
 		unregistered = append(unregistered, "JSONProducer")
 	}
 
+	if o.Auth0AuthAuth == nil {
+		unregistered = append(unregistered, "AuthorizationAuth")
+	}
+
 	if o.BookshelfAddReudBookHandler == nil {
 		unregistered = append(unregistered, "bookshelf.AddReudBookHandler")
 	}
 
 	if o.BookshelfDeleteReudBookHandler == nil {
 		unregistered = append(unregistered, "bookshelf.DeleteReudBookHandler")
+	}
+
+	if o.BookshelfGetReudBookHandler == nil {
+		unregistered = append(unregistered, "bookshelf.GetReudBookHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -166,14 +194,25 @@ func (o *PortalReudNetAPI) ServeErrorFor(operationID string) func(http.ResponseW
 // AuthenticatorsFor gets the authenticators for the specified security schemes
 func (o *PortalReudNetAPI) AuthenticatorsFor(schemes map[string]spec.SecurityScheme) map[string]runtime.Authenticator {
 
-	return nil
+	result := make(map[string]runtime.Authenticator)
+	for name := range schemes {
+		switch name {
+
+		case "auth0Auth":
+
+			scheme := schemes[name]
+			result[name] = o.APIKeyAuthenticator(scheme.Name, scheme.In, o.Auth0AuthAuth)
+
+		}
+	}
+	return result
 
 }
 
 // Authorizer returns the registered authorizer
 func (o *PortalReudNetAPI) Authorizer() runtime.Authorizer {
 
-	return nil
+	return o.APIAuthorizer
 
 }
 
@@ -258,6 +297,11 @@ func (o *PortalReudNetAPI) initHandlerCache() {
 		o.handlers["DELETE"] = make(map[string]http.Handler)
 	}
 	o.handlers["DELETE"]["/bookshelf/{bookId}"] = bookshelf.NewDeleteReudBook(o.context, o.BookshelfDeleteReudBookHandler)
+
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/bookshelf"] = bookshelf.NewGetReudBook(o.context, o.BookshelfGetReudBookHandler)
 
 }
 

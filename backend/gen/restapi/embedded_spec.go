@@ -33,11 +33,41 @@ func init() {
     },
     "version": "0.0.1"
   },
-  "host": "TODO",
-  "basePath": "/",
+  "host": "localhost:8000",
+  "basePath": "/api",
   "paths": {
     "/bookshelf": {
+      "get": {
+        "description": "DBに保存された本の情報の取得",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "bookshelf"
+        ],
+        "summary": "Get books I read, from DB",
+        "operationId": "getReudBook",
+        "responses": {
+          "200": {
+            "description": "本の情報、IDはreudが本を同サイトから消す際に使用される。",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StoredBook"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "post": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの本を投稿できる機能(amazonにあるもの)",
         "consumes": [
           "application/json"
@@ -76,6 +106,11 @@ func init() {
     },
     "/bookshelf/{bookId}": {
       "delete": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの投稿した本を削除する機能",
         "tags": [
           "bookshelf"
@@ -141,6 +176,28 @@ func init() {
           "example": "Book Title"
         }
       }
+    },
+    "StoredBook": {
+      "type": "object",
+      "required": [
+        "ID"
+      ],
+      "properties": {
+        "ID": {
+          "type": "integer",
+          "example": "24"
+        },
+        "book": {
+          "$ref": "#/definitions/Book"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "auth0Auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   },
   "tags": [
@@ -166,11 +223,41 @@ func init() {
     },
     "version": "0.0.1"
   },
-  "host": "TODO",
-  "basePath": "/",
+  "host": "localhost:8000",
+  "basePath": "/api",
   "paths": {
     "/bookshelf": {
+      "get": {
+        "description": "DBに保存された本の情報の取得",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "bookshelf"
+        ],
+        "summary": "Get books I read, from DB",
+        "operationId": "getReudBook",
+        "responses": {
+          "200": {
+            "description": "本の情報、IDはreudが本を同サイトから消す際に使用される。",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StoredBook"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "post": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの本を投稿できる機能(amazonにあるもの)",
         "consumes": [
           "application/json"
@@ -209,6 +296,11 @@ func init() {
     },
     "/bookshelf/{bookId}": {
       "delete": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの投稿した本を削除する機能",
         "tags": [
           "bookshelf"
@@ -274,6 +366,28 @@ func init() {
           "example": "Book Title"
         }
       }
+    },
+    "StoredBook": {
+      "type": "object",
+      "required": [
+        "ID"
+      ],
+      "properties": {
+        "ID": {
+          "type": "integer",
+          "example": "24"
+        },
+        "book": {
+          "$ref": "#/definitions/Book"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "auth0Auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   },
   "tags": [

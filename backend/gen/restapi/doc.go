@@ -12,8 +12,8 @@ TODO
     Schemes:
       http
       https
-    Host: TODO
-    BasePath: /
+    Host: localhost:8000
+    BasePath: /api
     Version: 0.0.1
     License: Apache 2.0 http://www.apache.org/licenses/LICENSE-2.0.html
 
