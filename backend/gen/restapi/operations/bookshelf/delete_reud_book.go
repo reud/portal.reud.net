@@ -6,22 +6,23 @@ package bookshelf
 // Editing this file might prove futile when you re-run the generate command
 
 import (
+	"encoding/json"
 	"net/http"
 
 	middleware "github.com/go-openapi/runtime/middleware"
 )
 
 // DeleteReudBookHandlerFunc turns a function with the right signature into a delete reud book handler
-type DeleteReudBookHandlerFunc func(DeleteReudBookParams, interface{}) middleware.Responder
+type DeleteReudBookHandlerFunc func(DeleteReudBookParams, *map[string]*json.RawMessage) middleware.Responder
 
 // Handle executing the request and returning a response
-func (fn DeleteReudBookHandlerFunc) Handle(params DeleteReudBookParams, principal interface{}) middleware.Responder {
+func (fn DeleteReudBookHandlerFunc) Handle(params DeleteReudBookParams, principal *map[string]*json.RawMessage) middleware.Responder {
 	return fn(params, principal)
 }
 
 // DeleteReudBookHandler interface for that can handle valid delete reud book params
 type DeleteReudBookHandler interface {
-	Handle(DeleteReudBookParams, interface{}) middleware.Responder
+	Handle(DeleteReudBookParams, *map[string]*json.RawMessage) middleware.Responder
 }
 
 // NewDeleteReudBook creates a new http.Handler for the delete reud book operation
@@ -56,9 +57,9 @@ func (o *DeleteReudBook) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 	if aCtx != nil {
 		r = aCtx
 	}
-	var principal interface{}
+	var principal *map[string]*json.RawMessage
 	if uprinc != nil {
-		principal = uprinc
+		principal = uprinc.(*map[string]*json.RawMessage) // this is really a map[string]*json.RawMessage, I promise
 	}
 
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params

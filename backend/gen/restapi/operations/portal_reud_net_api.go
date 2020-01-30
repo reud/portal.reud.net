@@ -6,6 +6,7 @@ package operations
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
@@ -39,10 +40,10 @@ func NewPortalReudNetAPI(spec *loads.Document) *PortalReudNetAPI {
 		BearerAuthenticator: security.BearerAuth,
 		JSONConsumer:        runtime.JSONConsumer(),
 		JSONProducer:        runtime.JSONProducer(),
-		BookshelfAddReudBookHandler: bookshelf.AddReudBookHandlerFunc(func(params bookshelf.AddReudBookParams, principal interface{}) middleware.Responder {
+		BookshelfAddReudBookHandler: bookshelf.AddReudBookHandlerFunc(func(params bookshelf.AddReudBookParams, principal *map[string]*json.RawMessage) middleware.Responder {
 			return middleware.NotImplemented("operation BookshelfAddReudBook has not yet been implemented")
 		}),
-		BookshelfDeleteReudBookHandler: bookshelf.DeleteReudBookHandlerFunc(func(params bookshelf.DeleteReudBookParams, principal interface{}) middleware.Responder {
+		BookshelfDeleteReudBookHandler: bookshelf.DeleteReudBookHandlerFunc(func(params bookshelf.DeleteReudBookParams, principal *map[string]*json.RawMessage) middleware.Responder {
 			return middleware.NotImplemented("operation BookshelfDeleteReudBook has not yet been implemented")
 		}),
 		BookshelfGetReudBookHandler: bookshelf.GetReudBookHandlerFunc(func(params bookshelf.GetReudBookParams) middleware.Responder {
@@ -50,7 +51,7 @@ func NewPortalReudNetAPI(spec *loads.Document) *PortalReudNetAPI {
 		}),
 
 		// Applies when the "Authorization" header is set
-		Auth0AuthAuth: func(token string) (interface{}, error) {
+		Auth0AuthAuth: func(token string) (*map[string]*json.RawMessage, error) {
 			return nil, errors.NotImplemented("api key auth (auth0Auth) Authorization from header param [Authorization] has not yet been implemented")
 		},
 
@@ -89,7 +90,7 @@ type PortalReudNetAPI struct {
 
 	// Auth0AuthAuth registers a function that takes a token and returns a principal
 	// it performs authentication based on an api key Authorization provided in the header
-	Auth0AuthAuth func(string) (interface{}, error)
+	Auth0AuthAuth func(string) (*map[string]*json.RawMessage, error)
 
 	// APIAuthorizer provides access control (ACL/RBAC/ABAC) by providing access to the request and authenticated principal
 	APIAuthorizer runtime.Authorizer
@@ -201,7 +202,9 @@ func (o *PortalReudNetAPI) AuthenticatorsFor(schemes map[string]spec.SecuritySch
 		case "auth0Auth":
 
 			scheme := schemes[name]
-			result[name] = o.APIKeyAuthenticator(scheme.Name, scheme.In, o.Auth0AuthAuth)
+			result[name] = o.APIKeyAuthenticator(scheme.Name, scheme.In, func(token string) (interface{}, error) {
+				return o.Auth0AuthAuth(token)
+			})
 
 		}
 	}

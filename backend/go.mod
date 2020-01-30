@@ -13,6 +13,7 @@ require (
 	github.com/go-openapi/validate v0.19.6
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/jinzhu/gorm v1.9.12 // indirect
+	github.com/joho/godotenv v1.3.0
 	github.com/lestrrat-go/jwx v0.9.0
 	github.com/pkg/errors v0.9.1 // indirect
 	golang.org/x/net v0.0.0-20190827160401-ba9fcec4b297

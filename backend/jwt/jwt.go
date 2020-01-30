@@ -8,17 +8,7 @@ import (
 	"log"
 )
 
-type T struct {
-	Iss string `json:"iss"`
-	Sub string `json:"sub"`
-	Aud string `json:"aud"`
-	Iat int    `json:"iat"`
-	Exp int    `json:"exp"`
-	Azp string `json:"azp"`
-	Gty string `json:"gty"`
-}
-
-func Validate(key string) (payload *T, err error) {
+func Validate(key string) (jwtMap *map[string]*json.RawMessage, err error) {
 	set, err := jwk.Fetch("https://reud.auth0.com/.well-known/jwks.json")
 	if err != nil {
 		log.Printf("failed to parse JWK: %s", err)
@@ -27,11 +17,15 @@ func Validate(key string) (payload *T, err error) {
 
 	// TODO: 多分ここ今全アプリケーション<->全API　に対して許可になっているのでいい感じにする。 俺のsubクレームと比較でいい気がする
 	p, err := jws.VerifyWithJWKSet([]byte(key), set, nil)
-	data := &T{}
-	err = json.Unmarshal(p, data)
+	fmt.Println(string(p))
+
+	var jwt map[string]*json.RawMessage
+	err = json.Unmarshal(p, &jwt)
 	if err != nil {
 		return nil, err
 	}
 
-	return data, err
+	fmt.Println(string(*jwt["sub"]))
+
+	return &jwt, err
 }

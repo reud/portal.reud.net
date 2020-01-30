@@ -4,6 +4,7 @@ package restapi
 
 import (
 	"backend/handler/reudbook"
+	"backend/jwt"
 	"crypto/tls"
 	"net/http"
 
@@ -31,6 +32,8 @@ func configureAPI(api *operations.PortalReudNetAPI) http.Handler {
 	api.JSONConsumer = runtime.JSONConsumer()
 
 	api.JSONProducer = runtime.JSONProducer()
+
+	api.Auth0AuthAuth = jwt.Validate
 
 	api.BookshelfAddReudBookHandler = reudbook.AddReudBookHandler()
 	api.BookshelfDeleteReudBookHandler = reudbook.DeleteReudBookHandler()
