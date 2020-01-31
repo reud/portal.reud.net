@@ -2,10 +2,12 @@ package jwt
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/lestrrat-go/jwx/jwk"
 	"github.com/lestrrat-go/jwx/jws"
 	"log"
+	"os"
 )
 
 func Validate(key string) (jwtMap *map[string]*json.RawMessage, err error) {
@@ -15,7 +17,6 @@ func Validate(key string) (jwtMap *map[string]*json.RawMessage, err error) {
 		return nil, err
 	}
 
-	// TODO: 多分ここ今全アプリケーション<->全API　に対して許可になっているのでいい感じにする。 俺のsubクレームと比較でいい気がする
 	p, err := jws.VerifyWithJWKSet([]byte(key), set, nil)
 	fmt.Println(string(p))
 
@@ -23,6 +24,12 @@ func Validate(key string) (jwtMap *map[string]*json.RawMessage, err error) {
 	err = json.Unmarshal(p, &jwt)
 	if err != nil {
 		return nil, err
+	}
+
+	sub := os.Getenv("SUB_TOKEN")
+
+	if sub != string(*jwt["sub"]) {
+		return nil, errors.New("u r not reud")
 	}
 
 	fmt.Println(string(*jwt["sub"]))

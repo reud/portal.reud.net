@@ -51,6 +51,11 @@ const routes = [
       }
     ],
     beforeEnter: authGuard
+  },
+  {
+    path: '/bookshelf',
+    name: 'bookshelf',
+    component: () => import('../views/Bookshelf.vue')
   }
 ];
 
@@ -58,6 +63,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
 export default router

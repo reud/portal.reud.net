@@ -11,7 +11,6 @@ TODO
 
     Schemes:
       http
-      https
     Host: localhost:8000
     BasePath: /api
     Version: 0.0.1

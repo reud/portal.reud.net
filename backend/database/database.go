@@ -16,8 +16,8 @@ func (d *Database) Close() {
 	}
 }
 
-func NewDatabase(dialect string, settings string) *Database {
-	db, err := gorm.Open(dialect, settings)
+func NewDatabase() *Database {
+	db, err := gorm.Open("postgres", "host=localhost user=postgres port=5432 sslmode=disable")
 	if err != nil {
 		panic(err)
 	}

@@ -19,7 +19,6 @@ var (
 func init() {
 	SwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "https",
     "http"
   ],
   "swagger": "2.0",
@@ -147,7 +146,8 @@ func init() {
       "required": [
         "title",
         "href",
-        "imageSource",
+        "wsfeImageSource",
+        "irjpImageSource",
         "tag1"
       ],
       "properties": {
@@ -155,7 +155,7 @@ func init() {
           "type": "string",
           "example": "https://www.amazon.co.jp/"
         },
-        "imageSource": {
+        "irjpImageSource": {
           "type": "string",
           "example": "https://ir-jp.amazon-adsystem.com/e/ir"
         },
@@ -174,6 +174,10 @@ func init() {
         "title": {
           "type": "string",
           "example": "Book Title"
+        },
+        "wsfeImageSource": {
+          "type": "string",
+          "example": "//ws-fe.amazon-adsystem.com/widgets/q"
         }
       }
     },
@@ -209,7 +213,6 @@ func init() {
 }`))
 	FlatSwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "https",
     "http"
   ],
   "swagger": "2.0",
@@ -337,7 +340,8 @@ func init() {
       "required": [
         "title",
         "href",
-        "imageSource",
+        "wsfeImageSource",
+        "irjpImageSource",
         "tag1"
       ],
       "properties": {
@@ -345,7 +349,7 @@ func init() {
           "type": "string",
           "example": "https://www.amazon.co.jp/"
         },
-        "imageSource": {
+        "irjpImageSource": {
           "type": "string",
           "example": "https://ir-jp.amazon-adsystem.com/e/ir"
         },
@@ -364,6 +368,10 @@ func init() {
         "title": {
           "type": "string",
           "example": "Book Title"
+        },
+        "wsfeImageSource": {
+          "type": "string",
+          "example": "//ws-fe.amazon-adsystem.com/widgets/q"
         }
       }
     },

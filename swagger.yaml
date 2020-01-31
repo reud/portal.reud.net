@@ -14,7 +14,6 @@ tags:
     description: "本棚機能に関連したもの"
 
 schemes:
-  - "https"
   - "http"
 paths:
   /bookshelf:
@@ -101,7 +100,8 @@ definitions:
     required:
       - "title"
       - "href"
-      - "imageSource"
+      - "wsfeImageSource"
+      - "irjpImageSource"
       - "tag1"
     properties:
       title:
@@ -110,7 +110,10 @@ definitions:
       href:
         type: "string"
         example: "https://www.amazon.co.jp/"
-      imageSource:
+      wsfeImageSource:
+        type: "string"
+        example: "//ws-fe.amazon-adsystem.com/widgets/q"
+      irjpImageSource:
         type: "string"
         example: "https://ir-jp.amazon-adsystem.com/e/ir"
       tag1:
@@ -127,3 +130,4 @@ securityDefinitions:
     type: "apiKey"
     in: "header"
     name: "Authorization"
+

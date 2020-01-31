@@ -85,6 +85,11 @@
                     route: '/hobby',
                     name: 'HOBBY',
                     icon: 'ev-station'
+                },
+                {
+                    route: '/bookshelf',
+                    name: 'BOOKSHELF',
+                    icon: 'book'
                 }
             ],
             clicked: '',
