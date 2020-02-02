@@ -19,6 +19,7 @@ allocator() {
     docker stop local-reud-net-db
     docker rm local-reud-net-db
   elif [ $1 = "run" ]; then
+    cd backend || { echo "cd backend failed"; exit 127; }
     go build backend/cmd/portal-reud-net-server
     sudo ./portal-reud-net-server \
       --tls-certificate /etc/letsencrypt/live/portal-reud-net-backend.japaneast.cloudapp.azure.com/fullchain.pem \
