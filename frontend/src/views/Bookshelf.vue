@@ -45,7 +45,6 @@ export default Vue.extend({
   async created() {
     // @ts-ignore
     const token = await this.$auth.getTokenSilently();
-    console.log(token);
     const bookShelfApi = new BookshelfApi(token);
     const ret = await bookShelfApi.getReudBook();
     ret.data.forEach((d: Book) => {
@@ -56,7 +55,6 @@ export default Vue.extend({
     async send() {
       // @ts-ignore
       const token = await this.$auth.getTokenSilently();
-      console.log(token);
       const bookshelfApi = new BookshelfApi({
         apiKey: token
       });
