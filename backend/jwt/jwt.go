@@ -37,10 +37,10 @@ func Validate(key string) (jwtMap *map[string]*json.RawMessage, err error) {
 	}
 
 	exsub := os.Getenv("SUB_TOKEN")
-	sub := strings.Replace(string(*jwt["sub"]),"\"","",-1)
+	sub := strings.Replace(string(*jwt["sub"]), "\"", "", -1)
 
 	if exsub != sub {
-		return nil, errors.New("u r not reud expect: "+exsub + " and thers " + sub  )
+		return nil, errors.New("u r not reud")
 	}
 
 	fmt.Println(string(*jwt["sub"]))
