@@ -33,7 +33,7 @@ func init() {
     },
     "version": "0.0.1"
   },
-  "host": "localhost:8000",
+  "host": "portal-reud-net-backend.japaneast.cloudapp.azure.com",
   "basePath": "/api",
   "paths": {
     "/bookshelf": {
@@ -217,7 +217,7 @@ func init() {
     },
     "version": "0.0.1"
   },
-  "host": "localhost:8000",
+  "host": "portal-reud-net-backend.japaneast.cloudapp.azure.com",
   "basePath": "/api",
   "paths": {
     "/bookshelf": {
