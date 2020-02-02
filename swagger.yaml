@@ -14,7 +14,6 @@ tags:
     description: "本棚機能に関連したもの"
 
 schemes:
-  - "http"
   - "https"
 paths:
   /bookshelf:

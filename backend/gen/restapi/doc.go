@@ -10,7 +10,6 @@ TODO
 
 
     Schemes:
-      http
       https
     Host: portal-reud-net-backend.japaneast.cloudapp.azure.com
     BasePath: /api

@@ -19,7 +19,6 @@ var (
 func init() {
 	SwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "http",
     "https"
   ],
   "swagger": "2.0",
@@ -203,7 +202,6 @@ func init() {
 }`))
 	FlatSwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "http",
     "https"
   ],
   "swagger": "2.0",
