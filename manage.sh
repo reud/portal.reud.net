@@ -18,6 +18,13 @@ allocator() {
   elif [ $1 = "removedb" ]; then
     docker stop local-reud-net-db
     docker rm local-reud-net-db
+  elif [ $1 = "run" ]; then
+    go build backend/cmd/portal-reud-net-server
+    sudo ./portal-reud-net-server \
+      --tls-certificate /etc/letsencrypt/live/portal-reud-net-backend.japaneast.cloudapp.azure.com/fullchain.pem \
+      --tls-key /etc/letsencrypt/live/portal-reud-net-backend.japaneast.cloudapp.azure.com/privkey.pem \
+      --tls-port 443 \
+      --host 0.0.0.0
   else
     echo "usage script { codegen }"
   fi
