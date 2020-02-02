@@ -1,6 +1,7 @@
 reud.portal.net
 ===
 
+# TODOこれはもう古いので書き直す(swagger-codegen-cli -> openapi-generator)
 reudのポートフォリオ
 
 # contains
