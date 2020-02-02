@@ -26,7 +26,7 @@ allocator() {
       --tls-port 443 \
       --host 0.0.0.0
   else
-    echo "usage script { codegen }"
+    echo "usage script { codegen | createdb | removedb | run }"
   fi
 }
 
