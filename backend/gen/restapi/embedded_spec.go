@@ -52,7 +52,7 @@ func init() {
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/StoredBook"
+                "$ref": "#/definitions/Book"
               }
             }
           },
@@ -151,6 +151,10 @@ func init() {
         "tag1"
       ],
       "properties": {
+        "ID": {
+          "type": "integer",
+          "example": "24"
+        },
         "href": {
           "type": "string",
           "example": "https://www.amazon.co.jp/"
@@ -178,21 +182,6 @@ func init() {
         "wsfeImageSource": {
           "type": "string",
           "example": "//ws-fe.amazon-adsystem.com/widgets/q"
-        }
-      }
-    },
-    "StoredBook": {
-      "type": "object",
-      "required": [
-        "ID"
-      ],
-      "properties": {
-        "ID": {
-          "type": "integer",
-          "example": "24"
-        },
-        "book": {
-          "$ref": "#/definitions/Book"
         }
       }
     }
@@ -246,7 +235,7 @@ func init() {
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/StoredBook"
+                "$ref": "#/definitions/Book"
               }
             }
           },
@@ -345,6 +334,10 @@ func init() {
         "tag1"
       ],
       "properties": {
+        "ID": {
+          "type": "integer",
+          "example": "24"
+        },
         "href": {
           "type": "string",
           "example": "https://www.amazon.co.jp/"
@@ -372,21 +365,6 @@ func init() {
         "wsfeImageSource": {
           "type": "string",
           "example": "//ws-fe.amazon-adsystem.com/widgets/q"
-        }
-      }
-    },
-    "StoredBook": {
-      "type": "object",
-      "required": [
-        "ID"
-      ],
-      "properties": {
-        "ID": {
-          "type": "integer",
-          "example": "24"
-        },
-        "book": {
-          "$ref": "#/definitions/Book"
         }
       }
     }

@@ -25,7 +25,7 @@ type GetReudBookOK struct {
 	/*
 	  In: Body
 	*/
-	Payload []*models.StoredBook `json:"body,omitempty"`
+	Payload []*models.Book `json:"body,omitempty"`
 }
 
 // NewGetReudBookOK creates GetReudBookOK with default headers values
@@ -35,13 +35,13 @@ func NewGetReudBookOK() *GetReudBookOK {
 }
 
 // WithPayload adds the payload to the get reud book o k response
-func (o *GetReudBookOK) WithPayload(payload []*models.StoredBook) *GetReudBookOK {
+func (o *GetReudBookOK) WithPayload(payload []*models.Book) *GetReudBookOK {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get reud book o k response
-func (o *GetReudBookOK) SetPayload(payload []*models.StoredBook) {
+func (o *GetReudBookOK) SetPayload(payload []*models.Book) {
 	o.Payload = payload
 }
 
@@ -52,7 +52,7 @@ func (o *GetReudBookOK) WriteResponse(rw http.ResponseWriter, producer runtime.P
 	payload := o.Payload
 	if payload == nil {
 		// return empty array
-		payload = make([]*models.StoredBook, 0, 50)
+		payload = make([]*models.Book, 0, 50)
 	}
 
 	if err := producer.Produce(rw, payload); err != nil {

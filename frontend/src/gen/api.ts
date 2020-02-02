@@ -28,6 +28,12 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 export interface Book {
     /**
      * 
+     * @type {number}
+     * @memberof Book
+     */
+    ID?: number;
+    /**
+     * 
      * @type {string}
      * @memberof Book
      */
@@ -68,25 +74,6 @@ export interface Book {
      * @memberof Book
      */
     tag3?: string;
-}
-/**
- * 
- * @export
- * @interface StoredBook
- */
-export interface StoredBook {
-    /**
-     * 
-     * @type {number}
-     * @memberof StoredBook
-     */
-    ID: number;
-    /**
-     * 
-     * @type {Book}
-     * @memberof StoredBook
-     */
-    book?: Book;
 }
 
 /**
@@ -256,7 +243,7 @@ export const BookshelfApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReudBook(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StoredBook>> {
+        getReudBook(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Book>> {
             const localVarAxiosArgs = BookshelfApiAxiosParamCreator(configuration).getReudBook(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};

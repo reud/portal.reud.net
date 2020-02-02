@@ -1,13 +1,13 @@
 <template>
   <v-container>
     <v-btn @click="send"> Call </v-btn>
-    <v-card v-for="d in this.bookDatas" :key="d">
+    <v-card v-for="d in this.bookDatas" :key="d.id">
       <a :href="d.href" target="_blank"
       ><img
               border="0"
-              src="//ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=B07ZNTX1R5&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=reiman-22&language=ja_JP"/></a
+              :src="d.wsfeImageSource"/></a
       ><img
-            src="https://ir-jp.amazon-adsystem.com/e/ir?t=reiman-22&language=ja_JP&l=li3&o=9&a=B07ZNTX1R5"
+            :src="d.irjpImageSource"
             width="1"
             height="1"
             border="0"
@@ -20,10 +20,10 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {Book, BookshelfApi, StoredBook} from "@/gen/api";
+import {Book, BookshelfApi} from "@/gen/api";
 
 type DataType = {
-  bookDatas: StoredBook[];
+  bookDatas: Book[];
 };
 
 const toloveru:Book = {
@@ -48,7 +48,7 @@ export default Vue.extend({
     console.log(token);
     const bookShelfApi = new BookshelfApi(token);
     const ret = await bookShelfApi.getReudBook();
-    ret.data.forEach((d: StoredBook) => {
+    ret.data.forEach((d: Book) => {
       this.bookDatas.push(d);
     })
   },
@@ -57,7 +57,9 @@ export default Vue.extend({
       // @ts-ignore
       const token = await this.$auth.getTokenSilently();
       console.log(token);
-      const bookshelfApi = new BookshelfApi(token);
+      const bookshelfApi = new BookshelfApi({
+        apiKey: token
+      });
       await bookshelfApi.addReudBook(toloveru);
     }
   }

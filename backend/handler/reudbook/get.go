@@ -12,10 +12,10 @@ func GetReudBook(params bookshelf.GetReudBookParams) middleware.Responder {
 	db := database.NewDatabase()
 	books := db.FetchAll()
 	if books == nil {
-		return bookshelf.NewGetReudBookOK().WithPayload([]*models.StoredBook{})
+		return bookshelf.NewGetReudBookOK().WithPayload([]*models.Book{})
 	}
 
-	var ret []*models.StoredBook
+	var ret []*models.Book
 	for _, v := range *books {
 		ret = append(ret,&v)
 	}

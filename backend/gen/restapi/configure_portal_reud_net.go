@@ -6,6 +6,7 @@ import (
 	"backend/handler/reudbook"
 	"backend/jwt"
 	"crypto/tls"
+	"github.com/rs/cors"
 	"net/http"
 
 	"backend/gen/restapi/operations"
@@ -65,5 +66,11 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return handler
+	// cors
+	c := cors.New(cors.Options{
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders: []string{"Content-Type","Authorization"},
+		Debug:          true,
+	})
+	return c.Handler(handler)
 }

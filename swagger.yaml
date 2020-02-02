@@ -31,7 +31,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/StoredBook"
+              $ref: "#/definitions/Book"
         500:
           description: "Internal Server Error"
 
@@ -85,16 +85,6 @@ paths:
         401:
           description: "Unauthorized"
 definitions:
-  StoredBook:
-    type: "object"
-    required:
-      - "ID"
-    properties:
-      ID:
-        type: "integer"
-        example: "24"
-      book:
-        $ref: "#/definitions/Book"
   Book:
     type: "object"
     required:
@@ -104,6 +94,9 @@ definitions:
       - "irjpImageSource"
       - "tag1"
     properties:
+      ID:
+        type: "integer"
+        example: "24"
       title:
         type: "string"
         example: "Book Title"

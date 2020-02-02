@@ -17,6 +17,9 @@ import (
 // swagger:model Book
 type Book struct {
 
+	// ID
+	ID int64 `json:"ID,omitempty"`
+
 	// href
 	// Required: true
 	Href *string `json:"href"`
