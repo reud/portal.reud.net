@@ -39,6 +39,8 @@ $ brew install openapi-generator
 - [ ] 本棚のタイトルを入力できる様にする
 - [ ] 諸々リファクタリング
 - [ ] 名前変更機能の実装
+- [ ] delete todo
+- [ ] adminに飛べないバグの修正
 
 # メモ
 backendがうまくいかなかったら証明書の期限切れかもしれないので頑張ってlets encrypt再取得とかであとでぐぐる
