@@ -40,6 +40,10 @@ $ brew install openapi-generator
 - [ ] 諸々リファクタリング
 - [ ] 名前変更機能の実装
 
+# メモ
+backendがうまくいかなかったら証明書の期限切れかもしれないので頑張ってlets encrypt再取得とかであとでぐぐる
+
+
 # 参考
 - [go-swagger を使って swagger から Goのサーバとクライアントのコードを生成する - Qiita](https://qiita.com/o_tyazuke/items/43bd362e8e427aa0e340)
 - [OpenAPITools/openapi-generator: OpenAPI Generator allows generation of API client libraries (SDK generation), server stubs, documentation and configuration automatically given an OpenAPI Spec (v2, v3)](https://github.com/OpenAPITools/openapi-generator#15---homebrew)
