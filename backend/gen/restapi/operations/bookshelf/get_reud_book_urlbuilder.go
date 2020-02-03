@@ -9,24 +9,17 @@ import (
 	"errors"
 	"net/url"
 	golangswaggerpaths "path"
-	"strings"
-
-	"github.com/go-openapi/swag"
 )
 
-// DeleteReudBookURL generates an URL for the delete reud book operation
-type DeleteReudBookURL struct {
-	BookID int64
-
+// GetReudBookURL generates an URL for the get reud book operation
+type GetReudBookURL struct {
 	_basePath string
-	// avoid unkeyed usage
-	_ struct{}
 }
 
 // WithBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *DeleteReudBookURL) WithBasePath(bp string) *DeleteReudBookURL {
+func (o *GetReudBookURL) WithBasePath(bp string) *GetReudBookURL {
 	o.SetBasePath(bp)
 	return o
 }
@@ -34,22 +27,15 @@ func (o *DeleteReudBookURL) WithBasePath(bp string) *DeleteReudBookURL {
 // SetBasePath sets the base path for this url builder, only required when it's different from the
 // base path specified in the swagger spec.
 // When the value of the base path is an empty string
-func (o *DeleteReudBookURL) SetBasePath(bp string) {
+func (o *GetReudBookURL) SetBasePath(bp string) {
 	o._basePath = bp
 }
 
 // Build a url path and query string
-func (o *DeleteReudBookURL) Build() (*url.URL, error) {
+func (o *GetReudBookURL) Build() (*url.URL, error) {
 	var _result url.URL
 
-	var _path = "/bookshelf/{bookId}"
-
-	bookID := swag.FormatInt64(o.BookID)
-	if bookID != "" {
-		_path = strings.Replace(_path, "{bookId}", bookID, -1)
-	} else {
-		return nil, errors.New("bookId is required on DeleteReudBookURL")
-	}
+	var _path = "/bookshelf"
 
 	_basePath := o._basePath
 	if _basePath == "" {
@@ -61,7 +47,7 @@ func (o *DeleteReudBookURL) Build() (*url.URL, error) {
 }
 
 // Must is a helper function to panic when the url builder returns an error
-func (o *DeleteReudBookURL) Must(u *url.URL, err error) *url.URL {
+func (o *GetReudBookURL) Must(u *url.URL, err error) *url.URL {
 	if err != nil {
 		panic(err)
 	}
@@ -72,17 +58,17 @@ func (o *DeleteReudBookURL) Must(u *url.URL, err error) *url.URL {
 }
 
 // String returns the string representation of the path with query string
-func (o *DeleteReudBookURL) String() string {
+func (o *GetReudBookURL) String() string {
 	return o.Must(o.Build()).String()
 }
 
 // BuildFull builds a full url with scheme, host, path and query string
-func (o *DeleteReudBookURL) BuildFull(scheme, host string) (*url.URL, error) {
+func (o *GetReudBookURL) BuildFull(scheme, host string) (*url.URL, error) {
 	if scheme == "" {
-		return nil, errors.New("scheme is required for a full url on DeleteReudBookURL")
+		return nil, errors.New("scheme is required for a full url on GetReudBookURL")
 	}
 	if host == "" {
-		return nil, errors.New("host is required for a full url on DeleteReudBookURL")
+		return nil, errors.New("host is required for a full url on GetReudBookURL")
 	}
 
 	base, err := o.Build()
@@ -96,6 +82,6 @@ func (o *DeleteReudBookURL) BuildFull(scheme, host string) (*url.URL, error) {
 }
 
 // StringFull returns the string representation of a complete url
-func (o *DeleteReudBookURL) StringFull(scheme, host string) string {
+func (o *GetReudBookURL) StringFull(scheme, host string) string {
 	return o.Must(o.BuildFull(scheme, host)).String()
 }

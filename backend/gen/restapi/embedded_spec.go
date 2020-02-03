@@ -19,8 +19,7 @@ var (
 func init() {
 	SwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "swagger": "2.0",
   "info": {
@@ -33,11 +32,41 @@ func init() {
     },
     "version": "0.0.1"
   },
-  "host": "TODO",
-  "basePath": "/",
+  "host": "portal-reud-net-backend.japaneast.cloudapp.azure.com",
+  "basePath": "/api",
   "paths": {
     "/bookshelf": {
+      "get": {
+        "description": "DBに保存された本の情報の取得",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "bookshelf"
+        ],
+        "summary": "Get books I read, from DB",
+        "operationId": "getReudBook",
+        "responses": {
+          "200": {
+            "description": "本の情報、IDはreudが本を同サイトから消す際に使用される。",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "post": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの本を投稿できる機能(amazonにあるもの)",
         "consumes": [
           "application/json"
@@ -76,6 +105,11 @@ func init() {
     },
     "/bookshelf/{bookId}": {
       "delete": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの投稿した本を削除する機能",
         "tags": [
           "bookshelf"
@@ -112,15 +146,20 @@ func init() {
       "required": [
         "title",
         "href",
-        "imageSource",
+        "wsfeImageSource",
+        "irjpImageSource",
         "tag1"
       ],
       "properties": {
+        "ID": {
+          "type": "integer",
+          "example": "24"
+        },
         "href": {
           "type": "string",
           "example": "https://www.amazon.co.jp/"
         },
-        "imageSource": {
+        "irjpImageSource": {
           "type": "string",
           "example": "https://ir-jp.amazon-adsystem.com/e/ir"
         },
@@ -139,8 +178,19 @@ func init() {
         "title": {
           "type": "string",
           "example": "Book Title"
+        },
+        "wsfeImageSource": {
+          "type": "string",
+          "example": "//ws-fe.amazon-adsystem.com/widgets/q"
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "auth0Auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   },
   "tags": [
@@ -152,8 +202,7 @@ func init() {
 }`))
 	FlatSwaggerJSON = json.RawMessage([]byte(`{
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "swagger": "2.0",
   "info": {
@@ -166,11 +215,41 @@ func init() {
     },
     "version": "0.0.1"
   },
-  "host": "TODO",
-  "basePath": "/",
+  "host": "portal-reud-net-backend.japaneast.cloudapp.azure.com",
+  "basePath": "/api",
   "paths": {
     "/bookshelf": {
+      "get": {
+        "description": "DBに保存された本の情報の取得",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "bookshelf"
+        ],
+        "summary": "Get books I read, from DB",
+        "operationId": "getReudBook",
+        "responses": {
+          "200": {
+            "description": "本の情報、IDはreudが本を同サイトから消す際に使用される。",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "post": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの本を投稿できる機能(amazonにあるもの)",
         "consumes": [
           "application/json"
@@ -209,6 +288,11 @@ func init() {
     },
     "/bookshelf/{bookId}": {
       "delete": {
+        "security": [
+          {
+            "auth0Auth": []
+          }
+        ],
         "description": "amazonの投稿した本を削除する機能",
         "tags": [
           "bookshelf"
@@ -245,15 +329,20 @@ func init() {
       "required": [
         "title",
         "href",
-        "imageSource",
+        "wsfeImageSource",
+        "irjpImageSource",
         "tag1"
       ],
       "properties": {
+        "ID": {
+          "type": "integer",
+          "example": "24"
+        },
         "href": {
           "type": "string",
           "example": "https://www.amazon.co.jp/"
         },
-        "imageSource": {
+        "irjpImageSource": {
           "type": "string",
           "example": "https://ir-jp.amazon-adsystem.com/e/ir"
         },
@@ -272,8 +361,19 @@ func init() {
         "title": {
           "type": "string",
           "example": "Book Title"
+        },
+        "wsfeImageSource": {
+          "type": "string",
+          "example": "//ws-fe.amazon-adsystem.com/widgets/q"
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "auth0Auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
   },
   "tags": [

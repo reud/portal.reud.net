@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VisitorProfile from '@/components/templates/VisitorProfile.vue';
-import {authGuard} from "@/auth";
+import {authGuard, reudGuard} from "@/auth";
 
 Vue.use(VueRouter);
 
@@ -51,6 +51,17 @@ const routes = [
       }
     ],
     beforeEnter: authGuard
+  },
+  {
+    path: '/bookshelf',
+    name: 'bookshelf',
+    component: () => import('../views/Bookshelf.vue')
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/Admin.vue'),
+    beforeEnter: reudGuard
   }
 ];
 
@@ -58,6 +69,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
 export default router

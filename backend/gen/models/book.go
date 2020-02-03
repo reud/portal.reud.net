@@ -17,13 +17,16 @@ import (
 // swagger:model Book
 type Book struct {
 
+	// ID
+	ID int64 `json:"ID,omitempty"`
+
 	// href
 	// Required: true
 	Href *string `json:"href"`
 
-	// image source
+	// irjp image source
 	// Required: true
-	ImageSource *string `json:"imageSource"`
+	IrjpImageSource *string `json:"irjpImageSource"`
 
 	// tag1
 	// Required: true
@@ -38,6 +41,10 @@ type Book struct {
 	// title
 	// Required: true
 	Title *string `json:"title"`
+
+	// wsfe image source
+	// Required: true
+	WsfeImageSource *string `json:"wsfeImageSource"`
 }
 
 // Validate validates this book
@@ -48,7 +55,7 @@ func (m *Book) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateImageSource(formats); err != nil {
+	if err := m.validateIrjpImageSource(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -57,6 +64,10 @@ func (m *Book) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateTitle(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWsfeImageSource(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -75,9 +86,9 @@ func (m *Book) validateHref(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *Book) validateImageSource(formats strfmt.Registry) error {
+func (m *Book) validateIrjpImageSource(formats strfmt.Registry) error {
 
-	if err := validate.Required("imageSource", "body", m.ImageSource); err != nil {
+	if err := validate.Required("irjpImageSource", "body", m.IrjpImageSource); err != nil {
 		return err
 	}
 
@@ -96,6 +107,15 @@ func (m *Book) validateTag1(formats strfmt.Registry) error {
 func (m *Book) validateTitle(formats strfmt.Registry) error {
 
 	if err := validate.Required("title", "body", m.Title); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *Book) validateWsfeImageSource(formats strfmt.Registry) error {
+
+	if err := validate.Required("wsfeImageSource", "body", m.WsfeImageSource); err != nil {
 		return err
 	}
 

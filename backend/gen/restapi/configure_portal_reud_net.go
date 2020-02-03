@@ -3,15 +3,15 @@
 package restapi
 
 import (
+	"backend/handler/reudbook"
+	"backend/jwt"
 	"crypto/tls"
+	"github.com/rs/cors"
 	"net/http"
 
+	"backend/gen/restapi/operations"
 	errors "github.com/go-openapi/errors"
 	runtime "github.com/go-openapi/runtime"
-	middleware "github.com/go-openapi/runtime/middleware"
-
-	"backend/gen/restapi/operations"
-	"backend/gen/restapi/operations/bookshelf"
 )
 
 //go:generate swagger generate server --target ../../gen --name PortalReudNet --spec ../../../swagger.yaml --exclude-main
@@ -34,16 +34,11 @@ func configureAPI(api *operations.PortalReudNetAPI) http.Handler {
 
 	api.JSONProducer = runtime.JSONProducer()
 
-	if api.BookshelfAddReudBookHandler == nil {
-		api.BookshelfAddReudBookHandler = bookshelf.AddReudBookHandlerFunc(func(params bookshelf.AddReudBookParams) middleware.Responder {
-			return middleware.NotImplemented("operation bookshelf.AddReudBook has not yet been implemented")
-		})
-	}
-	if api.BookshelfDeleteReudBookHandler == nil {
-		api.BookshelfDeleteReudBookHandler = bookshelf.DeleteReudBookHandlerFunc(func(params bookshelf.DeleteReudBookParams) middleware.Responder {
-			return middleware.NotImplemented("operation bookshelf.DeleteReudBook has not yet been implemented")
-		})
-	}
+	api.Auth0AuthAuth = jwt.Validate
+
+	api.BookshelfAddReudBookHandler = reudbook.AddReudBookHandler()
+	api.BookshelfDeleteReudBookHandler = reudbook.DeleteReudBookHandler()
+	api.BookshelfGetReudBookHandler = reudbook.GetReudBookHandler()
 
 	api.ServerShutdown = func() {}
 
@@ -71,5 +66,11 @@ func setupMiddlewares(handler http.Handler) http.Handler {
 // The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.
 // So this is a good place to plug in a panic handling middleware, logging and metrics
 func setupGlobalMiddleware(handler http.Handler) http.Handler {
-	return handler
+	// cors
+	c := cors.New(cors.Options{
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders: []string{"Content-Type","Authorization"},
+		Debug:          true,
+	})
+	return c.Handler(handler)
 }
