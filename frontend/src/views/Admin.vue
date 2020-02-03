@@ -55,6 +55,7 @@ export default Vue.extend({
         return;
       }
       this.status = "Sending...";
+      // @ts-ignore
       const token = await this.$auth.getTokenSilently();
       const bookApi = new BookshelfApi({
         apiKey: token
@@ -71,13 +72,19 @@ export default Vue.extend({
       if (this.tag2 !== "") Object.assign(item,{tag2: this.tag2});
       if (this.tag3 !== "") Object.assign(item,{tag3: this.tag3});
 
-      await bookApi.addReudBook(item).catch((ev: any) => {
-        this.status = ev.toString();
-      });
-
       this.href = "";
       this.wsfe = "";
       this.irjp = "";
+
+      let errFlag = false;
+      await bookApi.addReudBook(item).catch((ev: any) => {
+        this.status = ev.toString();
+        errFlag = true;
+      });
+
+      if (!errFlag) {
+        this.status = "success to send";
+      }
     },
     parse() {
       if (this.htmlInput === "") {
@@ -101,7 +108,6 @@ function filter (htmlStr: string): string[] {
     if (ind === 1 || ind === 4 || ind === 6) {
       retArr.push(strip(val));
     }
-    console.log(`${ind}: ${val}`);
   });
   return retArr
 }
@@ -113,7 +119,7 @@ function strip (wrapped: string) {
 
   // 先頭の要素の削除 例えば src = の src 部分
   arr.shift();
-  const quotedStr = arr.join('');
+  const quotedStr = arr.join('=');
 
   return quotedStr.replace(/"/g, '');
 }

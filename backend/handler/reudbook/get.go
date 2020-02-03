@@ -17,8 +17,9 @@ func GetReudBook(params bookshelf.GetReudBookParams) middleware.Responder {
 
 	var ret []*models.Book
 	for _, v := range *books {
-		ret = append(ret,&v)
+		ret = append(ret, &v)
 	}
+	db.Close()
 
 	return bookshelf.NewGetReudBookOK().WithPayload(ret)
 }

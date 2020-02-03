@@ -10,5 +10,7 @@ import (
 func AddReudBook(params bookshelf.AddReudBookParams, jwt *map[string]*json.RawMessage) middleware.Responder {
 	db := database.NewDatabase()
 	db.Create(params.Body)
+	db.Close()
+
 	return bookshelf.NewAddReudBookNoContent()
 }
