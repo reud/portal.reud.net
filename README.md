@@ -1,7 +1,6 @@
 reud.portal.net
 ===
 
-# TODOこれはもう古いので書き直す(swagger-codegen-cli -> openapi-generator)
 reudのポートフォリオ
 
 # contains
@@ -16,7 +15,7 @@ reudのポートフォリオ
 ## Codegen
 - サーバとフロントの通信を円滑にするために、swagger.yamlから、サーバ用コード、クライアント側用コードの生成をしています。
 
-- サーバは[go-swagger](https://github.com/go-swagger/go-swagger),フロントは[swagger-codegen-cli v2](https://github.com/swagger-api/swagger-codegen)を使用しています。
+- サーバは[go-swagger](https://github.com/go-swagger/go-swagger),フロントは[openapi-generator](https://github.com/OpenAPITools/openapi-generator)を使用しています。
 
 ### go-swaggerのインストール
 
@@ -25,15 +24,22 @@ $ brew tap go-swagger/go-swagger
 $ brew install go-swagger
 ```
 
-### [Docker]swagger-codegen-cli(v2系)のインストール
-Dockerが一番楽なのでDockerを使用することをお勧めします。
+### openapi-generatorのインストール
 
 ```bash
-$ docker pull swaggerapi/swagger-codegen-cli
+$ brew install openapi-generator
 ```
+
+# TODO
+- [ ] CORS周り見直す
+- [ ] フロントからdelete出来る様にする。
+- [ ] Azure VMからAlibaba cloudに乗り換える
+- [ ] databaseをどうにかする
+- [ ] 画面をもう少し考える
+- [ ] 本棚のタイトルを入力できる様にする
+- [ ] 諸々リファクタリング
 
 
 # 参考
 - [go-swagger を使って swagger から Goのサーバとクライアントのコードを生成する - Qiita](https://qiita.com/o_tyazuke/items/43bd362e8e427aa0e340)
-- [swagger-api/swagger-codegen: swagger-codegen contains a template-driven engine to generate documentation, API clients and server stubs in different languages by parsing your OpenAPI / Swagger definition.](https://github.com/swagger-api/swagger-codegen#swagger-codegen-cli-docker-image)
-
+- [OpenAPITools/openapi-generator: OpenAPI Generator allows generation of API client libraries (SDK generation), server stubs, documentation and configuration automatically given an OpenAPI Spec (v2, v3)](https://github.com/OpenAPITools/openapi-generator#15---homebrew)
