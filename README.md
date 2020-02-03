@@ -38,7 +38,7 @@ $ brew install openapi-generator
 - [ ] 画面をもう少し考える
 - [ ] 本棚のタイトルを入力できる様にする
 - [ ] 諸々リファクタリング
-
+- [ ] 名前変更機能の実装
 
 # 参考
 - [go-swagger を使って swagger から Goのサーバとクライアントのコードを生成する - Qiita](https://qiita.com/o_tyazuke/items/43bd362e8e427aa0e340)
