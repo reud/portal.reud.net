@@ -44,7 +44,7 @@
                 {
                     name: 'blog',
                     icon: 'post',
-                    link: 'https://reud.net/'
+                    link: 'https://blog.reud.net/'
                 },
                 {
                     name: 'github',
