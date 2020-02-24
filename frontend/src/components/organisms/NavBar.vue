@@ -8,7 +8,7 @@
       </template>
       <v-list>
         <v-list-item
-          v-for="mnu in xsMenus"
+          v-for="mnu in allMenus"
           :key="mnu.id"
           @click="move(mnu.route)"
         >
@@ -17,7 +17,7 @@
       </v-list>
     </v-menu>
     <v-btn
-      v-for="mnu in menus"
+      v-for="mnu in allMenus"
       target="_blank"
       text
       :key="mnu.id"
@@ -115,27 +115,6 @@ export default Vue.extend({
         this.$router.push(route);
         this.clicked = route;
       }
-    }
-  },
-  computed: {
-    menus() {
-      if (this.$vuetify.breakpoint.xs) {
-        return [];
-      }
-      return this.allMenus
-        .filter(i => i.route !== location.pathname)
-        .filter(i => i.route !== this.clicked);
-    },
-    menuNames() {
-      return this.allMenus
-        .filter(i => i.route !== location.pathname)
-        .filter(i => i.route !== this.clicked)
-        .map(m => m.name);
-    },
-    xsMenus() {
-      return this.allMenus
-        .filter(i => i.route !== location.pathname)
-        .filter(i => i.route !== this.clicked);
     }
   }
 });
