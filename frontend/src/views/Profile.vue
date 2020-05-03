@@ -48,7 +48,7 @@
                 },
                 {
                     name: 'github',
-                    icon: 'github-box',
+                    icon: 'github',
                     link: 'https://github.com/reud'
                 }
             ]

@@ -57,6 +57,12 @@ export default Vue.extend({
                 title: 'ハッカソン　HackFutureで優勝',
                 description: '三菱地所と株式会社POLの共催するハッカソンで優勝',
                 url: 'https://reud.net/2019/12/16/post-873/'
+            },
+            {
+                date: '2020/04',
+                title: '第二回 アルゴリズム実技検定  中級',
+                description: 'プログラミングスキルを可視化するオンラインプログラミング検定「アルゴリズム実技検定」の第2回試験において中級を取得',
+                url: 'https://reud.net/2019/12/16/post-873/'
             }
         ]
     })
