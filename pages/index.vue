@@ -29,28 +29,48 @@
         </v-btn>
       </v-col>
     </v-row>
+    <br />
+    <br />
+    <br />
+    <v-row>
+      <p>Update 履歴</p>
+    </v-row>
+    <v-row>
+      <News />
+    </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-export default Vue.extend({
-  name: 'Profile',
-  data: () => ({
-    items: [
-      {
-        name: 'blog',
-        icon: 'post',
-        link: 'https://blog.reud.net/'
-      },
-      {
-        name: 'github',
-        icon: 'github',
-        link: 'https://github.com/reud'
-      }
-    ]
-  })
+import { Component } from 'nuxt-property-decorator'
+import News from '~/components/News.vue'
+
+interface Icon {
+  name: string
+  icon: string
+  link: string
+}
+
+@Component({
+  components: { News }
 })
+export default class Index extends Vue {
+  items: Icon[] = [
+    {
+      name: 'blog',
+      icon: 'post',
+      link: 'https://blog.reud.net/'
+    },
+    {
+      name: 'github',
+      icon: 'github',
+      link: 'https://github.com/reud'
+    }
+  ]
+
+
+}
 </script>
 
 <style scoped>

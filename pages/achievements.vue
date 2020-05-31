@@ -46,8 +46,9 @@ export default class Achievements extends Vue {
       }
     )
 
-    this.achievements = res.data.contents;
+    this.achievements = res.data.contents
   }
+
 }
 </script>
 
