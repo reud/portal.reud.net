@@ -44,13 +44,24 @@
     </v-content>
     <v-navigation-drawer v-model="rightDrawer" right temporary fixed>
       <v-list>
-        <v-list-item @click="console.log('いつか実装します・・・')">
+        <v-list-item v-if="!user" @click="login">
           <v-list-item-action>
             <v-icon light>
               mdi-google
             </v-icon>
           </v-list-item-action>
           <v-list-item-title>Login with Google(TBD)</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          v-if="user"
+          @click="alert(`Hello! ${user.displayName || 'hoge'}`)"
+        >
+          <v-icon light>
+            mdi-google
+          </v-icon>
+          <v-list-item-title>{{
+            user.displayName || 'hoge'
+          }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -60,34 +71,46 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-trophy',
-          title: 'Achievements',
-          to: '/achievements'
-        },
-        {
-          icon: 'mdi-pickaxe',
-          title: 'Works',
-          to: '/works'
-        }
-      ],
-      miniVariant: false,
-      rightDrawer: false,
-      title: 'reud is (大工事中)'
-    };
+<script lang="ts">
+import Vue from 'vue';
+import { Component } from 'nuxt-property-decorator';
+import { fetchUser, handleGoogleLogin } from '~/plugins/auth';
+
+@Component
+export default class Default extends Vue {
+  miniVariant = false;
+  title = 'reud is';
+  rightDrawer = false;
+  clipped = false;
+  drawer = false;
+  fixed = false;
+  items = [
+    {
+      icon: 'mdi-apps',
+      title: 'Welcome',
+      to: '/'
+    },
+    {
+      icon: 'mdi-trophy',
+      title: 'Achievements',
+      to: '/achievements'
+    },
+    {
+      icon: 'mdi-pickaxe',
+      title: 'Works',
+      to: '/works'
+    }
+  ];
+
+  user: firebase.User | boolean = false;
+
+  async created() {
+    this.user = await fetchUser();
   }
-};
+
+  async login() {
+    const res = await handleGoogleLogin();
+    console.log(res);
+  }
+}
 </script>

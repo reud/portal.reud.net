@@ -75,6 +75,19 @@ export default {
    ** Build configuration
    */
   build: {
+    babel: {
+      // envName: server, client, modern
+      presets() {
+        return [
+          [
+            '@nuxt/babel-preset-app',
+            {
+              corejs: { version: 3 }
+            }
+          ]
+        ];
+      }
+    },
     /*
      ** You can extend webpack config here
      */
