@@ -44,7 +44,15 @@
     </v-content>
     <v-navigation-drawer v-model="rightDrawer" right temporary fixed>
       <v-list>
-        <v-list-item v-if="!user" @click="login">
+        <v-list-item v-if="isLoading">
+          <v-list-item-action>
+            <v-icon light>
+              mdi-google
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Now Loading...</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-else-if="!user" @click="login">
           <v-list-item-action>
             <v-icon light>
               mdi-google
@@ -52,10 +60,7 @@
           </v-list-item-action>
           <v-list-item-title>Login with Google(TBD)</v-list-item-title>
         </v-list-item>
-        <v-list-item
-          v-if="user"
-          @click="alert(`Hello! ${user.displayName || 'hoge'}`)"
-        >
+        <v-list-item v-else @click="$router.push('/user')">
           <v-icon light>
             mdi-google
           </v-icon>
@@ -74,10 +79,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component } from 'nuxt-property-decorator';
-import { fetchUser, handleGoogleLogin } from '~/plugins/auth';
+import firebase from 'firebase';
+import { handleGoogleLogin } from '~/plugins/auth';
 
 @Component
 export default class Default extends Vue {
+  isLoading = true;
   miniVariant = false;
   title = 'reud is';
   rightDrawer = false;
@@ -104,13 +111,19 @@ export default class Default extends Vue {
 
   user: firebase.User | boolean = false;
 
-  async created() {
-    this.user = await fetchUser();
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      this.isLoading = false;
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = false;
+      }
+    });
   }
 
   async login() {
-    const res = await handleGoogleLogin();
-    console.log(res);
+    await handleGoogleLogin();
   }
 }
 </script>

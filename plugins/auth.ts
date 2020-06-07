@@ -13,3 +13,4 @@ export const handleGoogleLogin = () => {
   const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
   return firebase.auth().signInWithPopup(googleAuthProvider);
 };
+// @ts-ignore
