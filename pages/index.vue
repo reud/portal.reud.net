@@ -18,7 +18,7 @@
     <v-row>
       <v-col>
         <p class="font-italic font-weight-light">
-          完全に立ち往生したエンジニア
+          なんでもできる様になりたいエンジニア志望の学生
         </p>
       </v-col>
     </v-row>
@@ -42,14 +42,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Component } from 'nuxt-property-decorator'
-import News from '~/components/News.vue'
+import Vue from 'vue';
+import { Component } from 'nuxt-property-decorator';
+import News from '~/components/News.vue';
 
 interface Icon {
-  name: string
-  icon: string
-  link: string
+  name: string;
+  icon: string;
+  link: string;
 }
 
 @Component({
@@ -67,9 +67,7 @@ export default class Index extends Vue {
       icon: 'github',
       link: 'https://github.com/reud'
     }
-  ]
-
-
+  ];
 }
 </script>
 

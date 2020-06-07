@@ -42,15 +42,15 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
+    <v-navigation-drawer v-model="rightDrawer" right temporary fixed>
       <v-list>
-        <v-list-item @click.native="right = !right">
+        <v-list-item @click="console.log('いつか実装します・・・')">
           <v-list-item-action>
             <v-icon light>
-              mdi-repeat
+              mdi-google
             </v-icon>
           </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+          <v-list-item-title>Login with Google(TBD)</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -74,16 +74,20 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-trophy',
           title: 'Achievements',
           to: '/achievements'
+        },
+        {
+          icon: 'mdi-pickaxe',
+          title: 'Works',
+          to: '/works'
         }
       ],
       miniVariant: false,
-      right: true,
       rightDrawer: false,
       title: 'reud is (大工事中)'
-    }
+    };
   }
-}
+};
 </script>
