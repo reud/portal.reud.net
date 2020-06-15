@@ -47,7 +47,7 @@
         <v-list-item v-if="isLoading">
           <v-list-item-action>
             <v-icon light>
-              mdi-google
+              mdi-twitter
             </v-icon>
           </v-list-item-action>
           <v-list-item-title>Now Loading...</v-list-item-title>
@@ -55,7 +55,7 @@
         <v-list-item v-else-if="!user" @click="login">
           <v-list-item-action>
             <v-icon light>
-              mdi-google
+              mdi-twitter
             </v-icon>
           </v-list-item-action>
           <v-list-item-title>Login with Google(TBD)</v-list-item-title>
@@ -67,6 +67,14 @@
           <v-list-item-title>{{
             user.displayName || 'hoge'
           }}</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-if="user" @click="$router.push('/')">
+          <v-list-item-action>
+            <v-icon light>
+              mdi-twitter
+            </v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Unfire (TBD)</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

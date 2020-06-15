@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Your Name: {{ (user && user.displayName) || 'name' }}</p>
+    <p>Your Name: {{ (user && user.displayName) || 'Loading...' }}</p>
     <v-btn @click="handleLogout"> Logout </v-btn>
   </div>
 </template>
