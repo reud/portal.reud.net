@@ -68,7 +68,7 @@
             user.displayName || 'hoge'
           }}</v-list-item-title>
         </v-list-item>
-        <v-list-item v-if="user" @click="$router.push('/')">
+        <v-list-item v-if="user" @click="$router.push('/unfire')">
           <v-list-item-action>
             <v-icon light>
               mdi-twitter
