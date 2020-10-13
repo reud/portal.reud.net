@@ -59,6 +59,7 @@ export default class Unfire extends Vue {
         `${this.keepLegendaryTweetV1BorderChecked}`
       );
     }
+    url.searchParams.set('callback_url', 'https://portal.reud.net/unfire');
     // eslint-disable-next-line no-console
     console.log(`redirect to ${url.toString()}`);
     location.href = url.toString();
