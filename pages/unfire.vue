@@ -20,7 +20,7 @@
       />
       <v-checkbox
         v-model="keepLegendaryTweetV1EnableChecked"
-        label="バズったツイートを削除するかどうか"
+        label="バズったツイートを保存するかどうか"
       />
       <v-text-field
         v-if="keepLegendaryTweetV1EnableChecked"
