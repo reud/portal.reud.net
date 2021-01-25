@@ -2,7 +2,7 @@
   <v-container fluid text-center>
     <v-row>
       <v-col>
-        <v-card class="mx-auto" max-width="800" tile>
+        <v-card class="mx-auto" max-width="1000" tile>
           <v-list disabled>
             <v-subheader>趣味</v-subheader>
             <v-list-item-group color="primary">
@@ -34,7 +34,7 @@ export default {
         },
         {
           name: "AtCoder",
-          description: "@reud"
+          description: "@reud 水色"
         },
         {
           name: "Twitter",
@@ -42,7 +42,8 @@ export default {
         },
         {
           name: "音楽",
-          description: "Creepy Nuts,ずっと真夜中で良いのに。,花譜辺りが好き"
+          description:
+            "Creepy Nuts,ずっと真夜中で良いのに。,花譜辺りが好きです。"
         },
         {
           name: "VR",
@@ -51,7 +52,7 @@ export default {
         {
           name: "Game",
           description: "Rocket League, Cyberpunk2077"
-        },
+        }
       ]
     };
   }
