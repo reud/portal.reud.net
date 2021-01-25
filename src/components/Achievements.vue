@@ -19,38 +19,27 @@
   </v-timeline>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import { Component } from 'nuxt-property-decorator';
-import axios from 'axios';
-import { MicroCMSListResponse } from '~/models';
+<script>
+import axios from "axios";
 
-interface Achievement {
-  date: string;
-  title: string;
-  description: string;
-  url: string | undefined;
-}
-
-@Component
-export default class Achievements extends Vue {
-  achievements: Achievement[] = [];
-
+export default {
+  name: "Achievements",
+  data: () => {
+    return {
+      achievements: []
+    };
+  },
   async created() {
-    const res = await axios.get<MicroCMSListResponse<Achievement>>(
-      'https://reud.microcms.io/api/v1/achievement',
-      {
-        headers: {
-          'x-api-key': '4474526c-3094-45b8-bf9a-6976c341ed1a'
-        }
+    const res = await axios.get("https://reud.microcms.io/api/v1/achievement", {
+      headers: {
+        "x-api-key": "4474526c-3094-45b8-bf9a-6976c341ed1a"
       }
-    );
-
+    });
     this.achievements = res.data.contents.sort((one, two) =>
-      one.date > two.date ? -1 : 1
+      one.date > two.date ? 1 : -1
     );
   }
-}
+};
 </script>
 
 <style scoped></style>

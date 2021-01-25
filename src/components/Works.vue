@@ -20,47 +20,29 @@
   </v-timeline>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import { Component } from 'nuxt-property-decorator';
-import axios from 'axios';
-import { MicroCMSListResponse } from '~/models';
+<script>
+import axios from "axios";
 
-interface Photo {
-  url: string;
-}
-
-interface Work {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  date: string;
-  color: string;
-  icon: string;
-  title: string;
-  description: string;
-  url: string | undefined;
-  photo: Photo | undefined;
-}
-
-@Component
-export default class Works extends Vue {
-  works: Work[] = [];
-
+export default {
+  name: "Works",
+  data: () => {
+    return {
+      works: []
+    };
+  },
   async created() {
-    const res = await axios.get<MicroCMSListResponse<Work>>(
-      'https://reud.microcms.io/api/v1/works',
-      {
-        headers: {
-          'x-api-key': '4474526c-3094-45b8-bf9a-6976c341ed1a'
-        }
+    const res = await axios.get("https://reud.microcms.io/api/v1/works", {
+      headers: {
+        "x-api-key": "4474526c-3094-45b8-bf9a-6976c341ed1a"
       }
-    );
+    });
     this.works = res.data.contents.sort((one, two) =>
-      one.date > two.date ? -1 : 1
+      one.date > two.date ? 1 : -1
     );
   }
-}
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
