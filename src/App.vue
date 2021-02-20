@@ -21,6 +21,9 @@
       <v-btn v-scroll-to="'#hobby'">
         Hobby
       </v-btn>
+      <v-btn v-scroll-to="'#links'">
+        Links
+      </v-btn>
     </v-app-bar>
 
     <v-main id="top">
@@ -34,6 +37,8 @@
       <Skills />
       <h2 id="hobby">HOBBY</h2>
       <Hobby />
+      <h2 id="links">LINKS</h2>
+      <Links />
     </v-main>
   </v-app>
 </template>
@@ -44,11 +49,13 @@ import Achievements from "@/components/Achievements";
 import Works from "@/components/Works";
 import Skills from "@/components/Skills";
 import Hobby from "@/components/Hobby";
+import Links from "@/components/Links";
 
 export default {
   name: "App",
 
   components: {
+    Links,
     Hobby,
     Skills,
     Works,
