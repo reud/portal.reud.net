@@ -1,29 +1,31 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="primary" dark >
       <v-app-bar-title class="hvr-grow">reud is</v-app-bar-title>
       <v-spacer />
-      <v-btn v-scroll-to="'#top'">
-        TOP
-      </v-btn>
-      <v-btn v-scroll-to="'#aboutMe'">
-        ABOUT ME
-      </v-btn>
-      <v-btn v-scroll-to="'#achievements'">
-        Achievements
-      </v-btn>
-      <v-btn v-scroll-to="'#works'">
-        Works
-      </v-btn>
-      <v-btn v-scroll-to="'#skills'">
-        Skills
-      </v-btn>
-      <v-btn v-scroll-to="'#hobby'">
-        Hobby
-      </v-btn>
-      <v-btn v-scroll-to="'#links'">
-        Links
-      </v-btn>
+      <div class="hidden-md-and-down">
+        <v-btn v-scroll-to="'#top'">
+          TOP
+        </v-btn>
+        <v-btn v-scroll-to="'#aboutMe'">
+          ABOUT ME
+        </v-btn>
+        <v-btn v-scroll-to="'#achievements'">
+          Achievements
+        </v-btn>
+        <v-btn v-scroll-to="'#works'">
+          Works
+        </v-btn>
+        <v-btn v-scroll-to="'#skills'">
+          Skills
+        </v-btn>
+        <v-btn v-scroll-to="'#hobby'">
+          Hobby
+        </v-btn>
+        <v-btn v-scroll-to="'#links'">
+          Links
+        </v-btn>
+      </div>
     </v-app-bar>
 
     <v-main id="top">
