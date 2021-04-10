@@ -1,28 +1,28 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark >
+    <v-app-bar app color="primary" dark>
       <v-app-bar-title class="hvr-grow">reud is</v-app-bar-title>
       <v-spacer />
       <div class="hidden-md-and-down">
-        <v-btn v-scroll-to="'#top'">
+        <v-btn text v-scroll-to="'#top'">
           TOP
         </v-btn>
-        <v-btn v-scroll-to="'#aboutMe'">
+        <v-btn text v-scroll-to="'#aboutMe'">
           ABOUT ME
         </v-btn>
-        <v-btn v-scroll-to="'#achievements'">
+        <v-btn text v-scroll-to="'#achievements'">
           Achievements
         </v-btn>
-        <v-btn v-scroll-to="'#works'">
+        <v-btn text v-scroll-to="'#works'">
           Works
         </v-btn>
-        <v-btn v-scroll-to="'#skills'">
+        <v-btn text v-scroll-to="'#skills'">
           Skills
         </v-btn>
-        <v-btn v-scroll-to="'#hobby'">
+        <v-btn text v-scroll-to="'#hobby'">
           Hobby
         </v-btn>
-        <v-btn v-scroll-to="'#links'">
+        <v-btn text v-scroll-to="'#links'">
           Links
         </v-btn>
       </div>
@@ -42,6 +42,10 @@
       <h2 id="links">LINKS</h2>
       <Links />
     </v-main>
+    <footer>
+      <small>最終更新日: 2021.04.10</small>
+      <p> &copy; Copyright 2021 reud. </p>
+    </footer>
   </v-app>
 </template>
 
@@ -104,5 +108,9 @@ h2:before {
   height: 6px;
   content: "";
   background: #0090ff;
+}
+
+footer {
+  text-align: center;
 }
 </style>

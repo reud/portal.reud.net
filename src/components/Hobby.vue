@@ -30,15 +30,11 @@ export default {
       hobby: [
         {
           name: "ブログ",
-          description: "https://blog.reud.net/ で執筆中"
+          description: "https://blog.reud.net/"
         },
         {
           name: "AtCoder",
           description: "@reud 水色"
-        },
-        {
-          name: "Twitter",
-          description: "@reudasas"
         },
         {
           name: "音楽",
@@ -51,7 +47,7 @@ export default {
         },
         {
           name: "Game",
-          description: "Rocket League, Cyberpunk2077"
+          description: "DeadCells"
         }
       ]
     };

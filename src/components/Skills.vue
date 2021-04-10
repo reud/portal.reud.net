@@ -34,15 +34,15 @@ export default {
         },
         {
           name: "Python3",
-          description: "AtCoder,たまに軽いスクリプトを作成する程度に利用"
+          description: "AtCoderで利用"
         },
         {
           name: "Go",
-          description: "アルバイトで利用"
+          description: "アルバイトで経験、趣味で書いたり"
         },
         {
           name: "JavaScript",
-          description: "アルバイトで利用、Vue.jsをメインで書いている。"
+          description: "アルバイトで経験、Vue.jsをメインで書いている"
         },
         {
           name: "C",
