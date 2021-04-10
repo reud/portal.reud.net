@@ -44,7 +44,7 @@
     </v-main>
     <footer>
       <small>最終更新日: 2021.04.10</small>
-      <p> &copy; Copyright 2021 reud. </p>
+      <p>&copy; Copyright 2021 reud.</p>
     </footer>
   </v-app>
 </template>
