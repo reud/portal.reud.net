@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-card class="mx-auto" max-width="800" tile>
-          <v-list disabled>
+          <v-list disabled color="#d8e3e7">
             <v-subheader>プログラミング言語</v-subheader>
             <v-list-item-group color="primary">
               <v-list-item v-for="(item, i) in langs" :key="i">

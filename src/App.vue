@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
+  <v-app >
+    <v-app-bar app color="#51c4d3" dark style="z-index: 100">
       <v-app-bar-title class="hvr-grow">reud is</v-app-bar-title>
       <v-spacer />
       <div class="hidden-md-and-down">
@@ -28,7 +28,7 @@
       </div>
     </v-app-bar>
 
-    <v-main id="top">
+    <v-main id="top" style="z-index: 99;">
       <h2 id="aboutMe">ABOUT ME</h2>
       <AboutMe />
       <h2 id="achievements">ACHIEVEMENTS</h2>
@@ -42,8 +42,9 @@
       <h2 id="links">LINKS</h2>
       <Links />
     </v-main>
+    <Background style="z-index: 0; position: absolute;" />
     <footer>
-      <small>最終更新日: 2021.04.10</small>
+      <small>最終更新日: 2021.05.05</small>
       <p>&copy; Copyright 2021 reud.</p>
     </footer>
   </v-app>
@@ -56,11 +57,13 @@ import Works from "@/components/Works";
 import Skills from "@/components/Skills";
 import Hobby from "@/components/Hobby";
 import Links from "@/components/Links";
+import Background from "@/components/Background";
 
 export default {
   name: "App",
 
   components: {
+    Background,
     Links,
     Hobby,
     Skills,
@@ -97,7 +100,7 @@ export default {
 h2 {
   position: relative;
   padding: 1rem 2rem;
-  border-bottom: 6px solid #0065ff;
+  border-bottom: 6px solid #126e82;
 }
 
 h2:before {
@@ -107,7 +110,7 @@ h2:before {
   width: 20%;
   height: 6px;
   content: "";
-  background: #0090ff;
+  background: #51c4d3;
 }
 
 footer {

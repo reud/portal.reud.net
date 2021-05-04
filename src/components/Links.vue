@@ -10,7 +10,9 @@
         <v-icon left>
           mdi-account-circle
         </v-icon>
-        AtCoder
+        <b style="color: gainsboro">
+          AtCoder
+        </b>
       </v-chip>
       <v-chip
         class="ma-2"
@@ -22,7 +24,9 @@
         <v-icon left>
           mdi-account-circle
         </v-icon>
-        Blog
+        <b style="color: gainsboro">
+          Blog
+        </b>
       </v-chip>
       <v-chip
         class="ma-2"
@@ -34,7 +38,7 @@
         <v-icon left>
           mdi-account-circle
         </v-icon>
-        Qiita
+        <b style="color: gainsboro"> Qiita </b>
       </v-chip>
       <v-chip
         class="ma-2"
@@ -46,7 +50,9 @@
         <v-icon left>
           mdi-account-circle
         </v-icon>
-        Zenn
+        <b style="color: gainsboro">
+          Zenn
+        </b>
       </v-chip>
     </v-row>
   </v-container>

@@ -2,7 +2,7 @@
   <v-timeline :dense="$vuetify.breakpoint.smAndDown">
     <v-timeline-item v-for="item in achievements" :key="item.id">
       <span slot="opposite"> {{ item.date }} </span>
-      <v-card class="elevation-2">
+      <v-card class="elevation-2" color="#d8e3e7">
         <v-card-title class="headline">
           {{ item.title }}
         </v-card-title>

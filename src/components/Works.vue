@@ -2,7 +2,7 @@
   <v-timeline :dense="$vuetify.breakpoint.smAndDown">
     <v-timeline-item v-for="work in works" :key="work.id">
       <span slot="opposite"> {{ work.date }} </span>
-      <v-card class="elevation-2">
+      <v-card class="elevation-2"  color="#d8e3e7">
         <v-card-title class="headline">
           {{ work.title }}
         </v-card-title>

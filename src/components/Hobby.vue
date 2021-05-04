@@ -2,8 +2,8 @@
   <v-container fluid text-center>
     <v-row>
       <v-col>
-        <v-card class="mx-auto" max-width="1000" tile>
-          <v-list disabled>
+        <v-card class="mx-auto" max-width="1000" tile >
+          <v-list disabled color="#d8e3e7">
             <v-subheader>趣味</v-subheader>
             <v-list-item-group color="primary">
               <v-list-item v-for="(item, i) in hobby" :key="i">
@@ -39,15 +39,15 @@ export default {
         {
           name: "音楽",
           description:
-            "Creepy Nuts,ずっと真夜中で良いのに。,花譜辺りが好きです。"
+            "最近エレキギターを初めて、初音ミクを買いました。"
         },
         {
           name: "VR",
-          description: "VRChatをたまにしています。"
+          description: "VRChatをたまにしています。ポピュレーションワンもたまに。"
         },
         {
           name: "Game",
-          description: "DeadCells"
+          description: "Dead Cellsにお熱です。"
         }
       ]
     };
